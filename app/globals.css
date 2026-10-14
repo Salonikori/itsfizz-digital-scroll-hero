@@ -1,0 +1,386 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Base ---------- */
+
+:root {
+  --lime: #d8ff43;
+  --paper: #f4f3ed;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: #171a13;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- Hero: layout ---------- */
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  min-height: 560px;
+  padding: 104px clamp(20px, 5vw, 76px) 34px;
+  overflow: hidden;
+  isolation: isolate;
+  color: white;
+  background: #151812;
+}
+
+/* soft green light behind the can */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse at 54% 48%, rgba(137, 165, 54, 0.24), transparent 33%),
+    radial-gradient(ellipse at 50% 110%, rgba(216, 255, 67, 0.1), transparent 44%),
+    linear-gradient(130deg, #171a13, #22271b 60%, #11130f);
+}
+
+/* film-grain texture */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.12;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--lime);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+/* ---------- Hero: headline ---------- */
+
+.hero-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  font-size: 0.65rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #c9cfbc;
+}
+
+.kicker-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 18px var(--lime);
+}
+
+.hero-title {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.15em 1.1em;
+  width: 100%;
+  margin: 0;
+  font-size: clamp(1.5rem, 5.2vw, 4.6rem);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  perspective: 600px;
+}
+
+.word {
+  display: inline-flex;
+}
+
+/* the wide letter-spacing comes from the margin between letters */
+.letter {
+  display: inline-block;
+  margin-right: 0.38em;
+  will-change: transform, opacity;
+}
+
+.word .letter:last-child {
+  margin-right: 0;
+}
+
+.word:nth-child(n + 2) .letter {
+  color: var(--lime);
+}
+
+/* ---------- Hero: can ---------- */
+
+.stage {
+  position: absolute;
+  inset: 30% 0 22%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.can {
+  height: 100%;
+  max-height: 470px;
+  aspect-ratio: 0.57;
+  filter: drop-shadow(0 30px 30px rgba(0, 0, 0, 0.45));
+  will-change: transform;
+}
+
+.can svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.product-glow {
+  position: absolute;
+  z-index: 0;
+  width: 44vw;
+  height: 44vw;
+  max-width: 500px;
+  max-height: 500px;
+  left: calc(50% - min(22vw, 250px));
+  top: calc(54% - min(22vw, 250px));
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(216, 255, 67, 0.17), transparent 68%);
+}
+
+.hero-index {
+  position: absolute;
+  top: 50%;
+  right: clamp(20px, 5vw, 76px);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  writing-mode: vertical-rl;
+}
+
+/* text shown at the end of the scroll animation */
+.hero-end {
+  position: absolute;
+  top: 42%;
+  left: clamp(20px, 7vw, 110px);
+  z-index: 3;
+  max-width: 38vw;
+  margin: 0;
+  font-size: clamp(1.6rem, 4.4vw, 4rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--lime);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ---------- Hero: bottom row ---------- */
+
+.hero-bottom {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: auto;
+}
+
+.hero-copy {
+  max-width: 255px;
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: #bfc3b7;
+}
+
+.hero-copy strong {
+  font-weight: 600;
+  color: white;
+}
+
+.stats {
+  display: flex;
+  gap: clamp(18px, 4vw, 62px);
+}
+
+.stat {
+  min-width: 100px;
+  max-width: 145px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.stat-number {
+  font-size: clamp(1.8rem, 3.3vw, 3.1rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.07em;
+  color: var(--lime);
+}
+
+.stat-label {
+  margin-top: 10px;
+  font-size: 0.68rem;
+  line-height: 1.45;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #c6c9bf;
+}
+
+.scroll-cue {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #d5d8ce;
+}
+
+.scroll-cue i {
+  display: block;
+  width: 34px;
+  height: 1px;
+  background: var(--lime);
+}
+
+/* ---------- Initial hidden state ----------
+   These elements are revealed by GSAP. Hiding them in CSS avoids a flash of
+   visible content before the intro animation starts. */
+
+.reveal,
+.letter,
+.stat,
+.stage,
+.product-glow {
+  visibility: hidden;
+}
+
+@media (scripting: none) {
+  .reveal,
+  .letter,
+  .stat,
+  .stage,
+  .product-glow {
+    visibility: visible;
+  }
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 700px) {
+  .hero {
+    padding-top: 92px;
+    padding-bottom: 24px;
+  }
+
+  .hero-title {
+    margin-top: 12px;
+    font-size: clamp(1.25rem, 6.2vw, 2.4rem);
+  }
+
+  .stage {
+    inset: 27% 0 33%;
+  }
+
+  .can {
+    max-height: 300px;
+  }
+
+  .product-glow {
+    width: 75vw;
+    height: 75vw;
+    max-width: none;
+    max-height: none;
+    left: 12.5vw;
+    top: calc(52% - 37vw);
+  }
+
+  .hero-index,
+  .scroll-cue {
+    display: none;
+  }
+
+  .hero-end {
+    top: auto;
+    bottom: 7vh;
+    left: 20px;
+    right: 20px;
+    max-width: none;
+    text-align: center;
+  }
+
+  .hero-bottom {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+
+  .hero-copy {
+    max-width: 260px;
+    font-size: 0.78rem;
+  }
+
+  .stats {
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .stat {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .stat-number {
+    font-size: clamp(1.8rem, 7vw, 2.7rem);
+  }
+
+  .stat-label {
+    font-size: 0.57rem;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .letter,
+  .stat,
+  .stage,
+  .product-glow {
+    visibility: visible;
+  }
+}
