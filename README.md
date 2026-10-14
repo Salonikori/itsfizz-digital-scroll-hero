@@ -5,6 +5,7 @@ then the hero pins to the screen and a soda can spins, grows and glides across t
 entirely by scroll position.
 
 **Live demo:** https://salonikori.github.io/itsfizz-digital-scroll-hero/
+
 **Repository:** https://github.com/Salonikori/itsfizz-digital-scroll-hero
 
 ## Features
