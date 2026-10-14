@@ -4,8 +4,8 @@ A scroll-driven hero section built for **itsfizz digital**. The headline and sta
 then the hero pins to the screen and a soda can spins, grows and glides across the page, driven
 entirely by scroll position.
 
-**Live demo:** https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/
-**Repository:** https://github.com/YOUR-USERNAME/YOUR-REPO-NAME
+**Live demo:** https://salonikori.github.io/itsfizz-digital-scroll-hero/
+**Repository:** https://github.com/Salonikori/itsfizz-digital-scroll-hero
 
 ## Features
 
